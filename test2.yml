@@ -1,0 +1,5 @@
+---
+
+-  hosts: CentOS
+   become: true
+   tasks:
