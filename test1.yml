@@ -4,4 +4,57 @@
    become: true
    tasks:
 
-   -  name:  
+   - name: Disable SELinux on CentOS
+     become: true
+     shell:
+       sudo sed -i 's/SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
+
+   - name: Installing nagios dependecies and libraries
+     tags: centos, dependecies, libraries
+     yum:
+       name:
+        - unzip
+        - postfix
+        - gcc
+        - glibc
+        - glibc-common
+        - perl
+        - httpd
+        - php
+        - wget
+        - gd
+        - gd-devel
+        - openssl-devel
+        - gcc
+        - glibc
+        - glibc-common
+        - make
+        - gettext
+        - automake
+        - autoconf
+        - wget
+        - openssl-devel
+        - net-snmp
+        - net-snmp-utils
+        - python3-pip
+        - python3
+        - perl-devel
+        - openssl
+       state: latest
+
+   -  name: Install Nagios
+      become: true
+      shell:
+        cd /usr/src
+        sudo wget https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.6.tar.gz
+        sudo tar zxf nagios-*.tar.gz
+        cd nagioscore-nagios*/
+
+   -  name: Compile Nagios
+      become: true
+      shell:
+        autoconf
+        ./configure
+        make all
+
+
