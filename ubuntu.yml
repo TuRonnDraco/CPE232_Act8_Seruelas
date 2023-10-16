@@ -1,0 +1,30 @@
+---
+
+- hosts: Ubuntu
+  become: true
+  tasks:
+
+  - name: Install Nagios4
+    become: true
+    apt:
+      name:
+        - nagios4
+        - nagios-plugins
+      state: latest
+
+  - name: Configure Apache Web Server
+    become: true
+    shell:
+      sudo a2enmod rewrite cgi
+
+  - name: Restart Apache Server after Configuration
+    service:
+      name: apache2
+      state: restarted
+      enabled: true
+
+  - name: Enable Nagios
+    service:
+      name: nagios4
+      state: restarted
+      enabled: true

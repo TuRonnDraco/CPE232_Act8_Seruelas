@@ -1,3 +1,8 @@
+---
+
+-  hosts: CentOS
+   become: true
+   tasks:
 
    - name: Installing Nagios Libraries and Dependencies
      tags: centos, dependecies, libraries

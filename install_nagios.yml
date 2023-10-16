@@ -10,13 +10,13 @@
         update_cache: yes
       changed_when: false
 
--  hosts: Ubuntu
-   become: true
-   roles:
-    - Ubuntu
-
-#-  hosts: CentOS
+#-  hosts: Ubuntu
 #   become: true
 #   roles:
-#    - CentOS
+#    - Ubuntu
+
+-  hosts: CentOS
+   become: true
+   roles:
+    - CentOS
 
